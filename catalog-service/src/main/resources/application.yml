@@ -1,0 +1,29 @@
+management:
+  health:
+    circuitbreakers:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      show-details: always
+resilience4j:
+  circuitbreaker:
+    instances:
+      mediaServiceClient:
+        registerHealthIndicator: true
+        eventConsumerBufferSize: 10
+        failureRateThreshold: 50
+        miniumNumberOfCalls: 5
+        automaticTransitionFromOpenToHaflOpenEnabled: true
+        waitDurationInOpenState: 5s
+        slidingWindowSize: 10
+        slidingWindowType: COUNT_BASED
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8180/auth/realms/microservice-ecommerce-realm

@@ -1,0 +1,36 @@
+DELETE FROM products_categories;
+DELETE FROM categories;
+DELETE FROM products;
+insert into categories value (1,'CT1','2022-2-23',true,N'Thiết Bị Điện Tử','tbdt',null,null);
+insert into categories value (2,'CT2','2022-2-23',true,N'Phụ Kiện Điện Tử','pkdt',null,null);
+insert into categories value (3,'CT3','2022-2-23',true,N'TV & Thiết Bị Điện Gia Dụng','tbdgd',null,null);
+insert into categories value (4,'CT4','2022-2-23',true,N'Sức Khoẻ & Làm Đẹp','skld',null,null);
+insert into categories value (5,'CT5','2022-2-23',true,N'Hàng Mẹ, Bé & Đồ Chơi','hmbdc',null,null);
+insert into categories value (6,'CT6','2022-2-23',true,N'Siêu Thị Tạp Hoá','tbdt',null,null);
+insert into categories value (7,'CT7','2022-2-23',true,N'Hàng Gia Dụng & Đời Sống','tbdt',null,null);
+insert into categories value (8,'CT8','2022-2-23',true,N'Thời Trang Nữ','tbdt',null,null);
+insert into categories value (9,'CT9','2022-2-23',true,N'Thời Trang Nam','tbdt',null,null);
+insert into categories value (10,'CT10','2022-2-23',true,N'Phụ Kiện Thời Trang','tbdt',null,null);
+insert into categories value (11,'CT11','2022-2-23',true,N'Thể Thao & Du Lịch','tbdt',null,null);
+insert into categories value (12,'CT12','2022-2-23',true,N'Ôtô, Xe Máy & Thiết Bị Định Vị','tbdt',null,null);
+insert into categories value (13,'CT13','2022-2-23',true,N'Điện Thoại Di Động','tbdt',null,'CT1');
+insert into categories value (14,'CT14','2022-2-23',true,N'Laptop','tbdt',null,'CT1');
+insert into categories value (15,'CT15','2022-2-23',true,N'Máy Tính Để Bàn','tbdt',null,'CT1');
+insert into categories value (16,'CT16','2022-2-23',true,N'Âm Thanh','tbdt',null,'CT1');
+insert into categories value (17,'CT17','2022-2-23',true,N'Laptop Cơ Bản','tbdt',null,'CT14');
+insert into categories value (18,'CT18','2022-2-23',true,N'Laptop Chơi Game','tbdt',null,'CT14');
+insert into categories value (19,'CT19','2022-2-23',true,N'Máy Tính Nguyên Bộ','tbdt',null,'CT15');
+insert into categories value (20,'CT20','2022-2-23',true,N'Máy Tính Tự Ráp','tbdt',null,'CT15');
+
+insert into products value (1,'PD1','2022-2-23','test',true,N'Samsung Galaxy S22','s22',null,'USR1');
+insert into products value (2,'PD2','2022-2-23','test',true,N'Cân điện tử','cdt',null,'USR1');
+insert into products value (3,'PD3','2022-2-23','test',true,N'Son hermes','sh',null,'USR1');
+insert into products value (4,'PD4','2022-2-23','test',true,N'Intel Core i5 12400f','s22',null,'USR1');
+
+insert into products_categories value (1,1);
+insert into products_categories value (1,13);
+insert into products_categories value (2,4);
+insert into products_categories value (3,4);
+insert into products_categories value (4,1);
+insert into products_categories value (4,15);
+insert into products_categories value (4,20);
