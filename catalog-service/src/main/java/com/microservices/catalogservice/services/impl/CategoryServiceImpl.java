@@ -39,7 +39,6 @@ public class CategoryServiceImpl implements ICategoryService {
         for (CategoryDto category : rootCategories
         ) {
             List<MediaDto> mediaList = mediaServiceClient.getMediaByProductCode(category.getCode()).get();
-            log.info("List media: " + mediaList);
             findSubCat(category,groupedSubCat);
             category.setMediaList(mediaList);
         }
@@ -94,6 +93,8 @@ public class CategoryServiceImpl implements ICategoryService {
     }
 
     private CategoryDto findSubCat(CategoryDto category, Map<String, List<CategoryDto>> result) {
+        List<MediaDto> mediaList = mediaServiceClient.getMediaByProductCode(category.getCode()).get();
+        category.setMediaList(mediaList);
         if (result.containsKey(category.getCode())) {
             List<CategoryDto> tempSubCats = result.get(category.getCode());
             List<CategoryDto> subCats = new ArrayList<>();
@@ -102,7 +103,6 @@ public class CategoryServiceImpl implements ICategoryService {
                 subCats.add(findSubCat(subCat, result));
             }
             category.setSubCategories(subCats);
-            return category;
         }
         return category;
     }

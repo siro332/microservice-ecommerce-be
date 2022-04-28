@@ -2,6 +2,7 @@ version: '3'
 services:
   mysqldb:
      image: mysql:5.7
+     restart: always
      container_name: mysqldb
      ports:
        - "3306:3306"

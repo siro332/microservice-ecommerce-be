@@ -16,6 +16,6 @@ public class ProductAttribute {
     private String code;
     @Nationalized
     private String name;
-    @Column(columnDefinition = "text")
+    @Nationalized
     private String description;
 }
