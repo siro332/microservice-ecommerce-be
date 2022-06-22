@@ -13,4 +13,5 @@ public interface CategoryRepository extends JpaRepository<Category,Long> {
     Set<Category> findByCodeIn(Set<String> categoryCodeList);
     List<Category> findAllByParentCodeIsNull();
     List<Category> findAllByParentCodeIsNotNull();
+    List<Category> findAllByCodeIn(List<String> codeList);
 }

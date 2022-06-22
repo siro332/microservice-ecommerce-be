@@ -16,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -69,6 +70,7 @@ public class ProductController {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
     @PostMapping("/add")
     public ResponseEntity<?> createProduct(@RequestBody ProductPojo productPojo) {
         try{
@@ -77,6 +79,17 @@ public class ProductController {
         }
         catch (Exception e){
             return ResponseEntity.badRequest().body("Error creating product: "+ e.getMessage());
+        }
+    }
+
+    @PostMapping("/update")
+    public ResponseEntity<?> updateProduct(@RequestBody ProductPojo productPojo) {
+        try{
+            Product newProduct = productService.updateProduct(productPojo);
+            return ResponseEntity.ok().body(dtoConverter.productEntityToDto(newProduct));
+        }
+        catch (Exception e){
+            return ResponseEntity.badRequest().body("Error updating product: "+ e.getMessage());
         }
     }
 
@@ -90,4 +103,17 @@ public class ProductController {
         return response;
     }
 
+    @GetMapping("/category/{categoryCode}/topSales")
+    public ResponseEntity<Map<String,Object>> getProductsCodeByCategoryCode(@PathVariable String categoryCode,
+                                                                      @RequestParam(defaultValue = "0") int page,
+                                                                      @RequestParam(defaultValue = "6") int size) {
+        try {
+            Page<ProductDto> productPage;
+            productPage = productService.getProductCodeByCategoryCode(categoryCode,PageRequest.of(page, size));
+            Map<String, Object> response = getResponse(productPage);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }

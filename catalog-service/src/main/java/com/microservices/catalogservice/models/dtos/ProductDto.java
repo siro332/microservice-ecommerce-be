@@ -1,5 +1,6 @@
 package com.microservices.catalogservice.models.dtos;
 
+import com.microservices.catalogservice.models.entities.product_inventory.ProductInventory;
 import lombok.Data;
 
 import java.util.Date;
@@ -18,4 +19,6 @@ public class ProductDto {
     private String description;
     private Set<CategoryDto> categories;
     private List<MediaDto> mediaList;
+    private List<ProductInventory> inventoryList;
+    private long totalUnitSold;
 }

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -20,14 +21,20 @@ import java.util.List;
 public class InventoryController {
     private final ProductInventoryRepository productInventoryRepository;
 
-    @GetMapping("/{productCode}")
-    public ResponseEntity<ProductInventory> findInventoryByProductCode(@PathVariable("productCode") String productCode) {
+    @GetMapping("/product/{productCode}")
+    public List<ProductInventory> findInventoryByProductCode(@PathVariable("productCode") String productCode) {
         log.info("Finding inventory for product code :"+productCode);
         List<ProductInventory> productInventoryList = productInventoryRepository.findByProductCode(productCode);
         if(productInventoryList.size()!=0) {
-            return new ResponseEntity(productInventoryList, HttpStatus.OK);
+            return productInventoryList;
         } else {
-            return new ResponseEntity(HttpStatus.NOT_FOUND);
+            return Collections.emptyList();
         }
+    }
+    @GetMapping("/{code}")
+    public ResponseEntity<ProductInventory> findInventoryByCode(@PathVariable("code") String code) {
+        log.info("Finding inventory for code :"+code);
+        ProductInventory productInventory = productInventoryRepository.findBySku(code);
+            return new ResponseEntity(productInventory, HttpStatus.OK);
     }
 }

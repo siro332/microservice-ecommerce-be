@@ -26,6 +26,22 @@ spring:
           uri: lb://MEDIA-SERVICE
           predicates:
             - Path=/api/media/**
+        - id: order-service
+          uri: lb://ORDER-SERVICE
+          predicates:
+            - Path=/api/order/**
+        - id: favorite-service
+          uri: lb://FAVORITE-SERVICE
+          predicates:
+            - Path=/api/favorite/**
+        - id: favorite-service
+          uri: lb://SEARCH-SERVICE
+          predicates:
+            - Path=/api/search/**
+        - id: user-service
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/api/user/**
   security:
     oauth2:
       resourceserver:

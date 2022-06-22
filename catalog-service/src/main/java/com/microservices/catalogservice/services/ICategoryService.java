@@ -14,4 +14,6 @@ public interface ICategoryService {
     Category addCategory(Category category);
 
     Optional<Category> update(String code, Category category);
+
+    List<String> queryNameByIds(List<String> ids);
 }

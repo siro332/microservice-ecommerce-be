@@ -71,8 +71,8 @@ public class CategoryServiceImpl implements ICategoryService {
 
     @Override
     public Category addCategory(Category category) {
-        UUID uuid =UUID.randomUUID();
         category.setCreatedAt(new Date());
+        UUID uuid =UUID.randomUUID();
         category.setCode("CT"+ Utils.uuidToBase64(uuid));
         return categoryRepository.save(category);
     }
@@ -90,6 +90,11 @@ public class CategoryServiceImpl implements ICategoryService {
             return Optional.of(categoryRepository.save(category));
         }
         return Optional.empty();
+    }
+
+    @Override
+    public List<String> queryNameByIds(List<String> ids) {
+        return categoryRepository.findAllByCodeIn(ids).stream().map(Category::getName).collect(Collectors.toList());
     }
 
     private CategoryDto findSubCat(CategoryDto category, Map<String, List<CategoryDto>> result) {

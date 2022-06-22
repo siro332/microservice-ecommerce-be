@@ -1,0 +1,36 @@
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8180/auth/realms/microservice-ecommerce-realm
+keycloak:
+  realm: microservice-ecommerce-realm
+  auth-server-url: http://localhost:8180/auth
+  ssl-required: none
+  use-resource-role-mappings: true
+  bearer-only: true
+  cors: true
+  principal-attribute: preferred_username
+  resource: keycloak
+resilience4j:
+  circuitbreaker:
+    instances:
+      productServiceClient:
+        registerHealthIndicator: true
+        eventConsumerBufferSize: 10
+        failureRateThreshold: 50
+        miniumNumberOfCalls: 5
+        automaticTransitionFromOpenToHaflOpenEnabled: true
+        waitDurationInOpenState: 5s
+        slidingWindowSize: 10
+        slidingWindowType: COUNT_BASED
+    productInventoryServiceClient:
+      registerHealthIndicator: true
+      eventConsumerBufferSize: 10
+      failureRateThreshold: 50
+      miniumNumberOfCalls: 5
+      automaticTransitionFromOpenToHaflOpenEnabled: true
+      waitDurationInOpenState: 5s
+      slidingWindowSize: 10
+      slidingWindowType: COUNT_BASED

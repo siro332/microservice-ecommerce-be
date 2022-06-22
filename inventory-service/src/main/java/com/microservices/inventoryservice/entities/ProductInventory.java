@@ -33,4 +33,7 @@ public class ProductInventory {
     private Double retailPrice;
     private Date createdAt;
     private Date updatedAt;
+    @OneToOne
+    @JoinColumn(name = "stock_id")
+    private Stock stock;
 }
